@@ -48,6 +48,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.1.0",
     "@prisma/client": "^7.1.0",
+    "@quixo3/prisma-session-store": "^3.1.13",
     "express": "^5.2.1",
     "express-session": "^1.18.2",
     "pg": "^8.16.3",
