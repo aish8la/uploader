@@ -1,7 +1,7 @@
 import { prisma } from "../configs/prisma.js";
-import type { IUser } from "../types/global.js";
+import type { User } from "../schemas/user.schema.js";
 
-export const getSafeUser = async (id: IUser["id"]) => {
+export const getSafeUser = async (id: User["id"]) => {
   return await prisma.user.findFirst({
     where: {
       id: id,
@@ -12,7 +12,7 @@ export const getSafeUser = async (id: IUser["id"]) => {
   });
 };
 
-export const getUserByEmail = async (email: IUser["email"]) => {
+export const getUserByEmail = async (email: User["email"]) => {
   return await prisma.user.findFirst({
     where: {
       email: email,
