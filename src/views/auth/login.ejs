@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <main>
+      <form action="/auth/login" method="POST">
+        <div class="form-card">
+          <div>
+            <label for="email">Email</label>
+            <input class="form-input" id="email" name="email" type="email" required />
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input class="form-input" id="password" name="password" type="password" required />
+          </div>
+          <button class="cte-btn" type="submit">Login</button>
+          <a class="btn" href="/auth/signup">Signup</a>
+          <% if (locals.errors) { %>
+            <%= errors.message %>
+          <% } %>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

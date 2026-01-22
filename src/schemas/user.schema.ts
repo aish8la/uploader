@@ -14,6 +14,8 @@ export const UserSchema = z.object({
 });
 
 export const SafeUserSchema = UserSchema.omit({ password: true });
+export const NewUserSchema = UserSchema.omit({ id: true });
 
 export type User = z.infer<typeof UserSchema>;
 export type SafeUser = z.infer<typeof SafeUserSchema>;
+export type NewUser = z.infer<typeof NewUserSchema>;
