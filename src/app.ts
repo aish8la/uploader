@@ -5,6 +5,7 @@ import { sessionMiddleware } from "./configs/session.js";
 import passport from "passport";
 import { fileURLToPath } from "node:url";
 import { localStrategy } from "./configs/passport.js";
+import router from "./routes/main.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV === "production") {
 passport.use(localStrategy);
 app.use(sessionMiddleware);
 app.use(passport.session());
+app.use(router);
 
 const PORT = Number(process.env.PORT) || 3000;
 
