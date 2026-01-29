@@ -1,0 +1,23 @@
+model Folder {
+  id           Int      @id @default(autoincrement())
+  name         String
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  owner        User     @relation(fields: [ownerId], references: [id])
+  ownerId      Int      @map("owner_id")
+  parentFolder Folder?  @relation("ParentFolder", fields: [parentId], references: [id])
+  childFolders Folder[] @relation("ParentFolder")
+  parentId     Int?     @map("parent_id")
+  files        File[]
+
+  @@unique([ownerId, parentId, name])
+}
+
+model File {
+  id          Int    @id @default(autoincrement())
+  displayName String @map("display_name")
+  storageKey  String @map("storage_key") @db.Uuid
+  folder      Folder @relation(fields: [folderId], references: [id])
+  folderId    Int    @map("folder_id")
+  size BigInt
+  uploadedAt DateTime @default(now()) @map("uploaded_at") @db.Timestamptz()
+}
