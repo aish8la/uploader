@@ -3,12 +3,9 @@ import path from "node:path";
 import express from "express";
 import { sessionMiddleware } from "./configs/session.js";
 import passport from "passport";
-import { fileURLToPath } from "node:url";
+import { __dirname } from "./configs/storage.js";
 import { localStrategy } from "./configs/passport.js";
 import router from "./routes/main.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
