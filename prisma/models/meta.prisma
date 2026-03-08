@@ -15,7 +15,6 @@ model Folder {
 model File {
   id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   displayName String   @map("display_name")
-  storageKey  String   @map("storage_key") @db.Uuid
   folder      Folder?  @relation(fields: [folderId], references: [id])
   folderId    String?  @map("folder_id") @db.Uuid
   size        BigInt   @default(0)
