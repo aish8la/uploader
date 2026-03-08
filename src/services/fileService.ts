@@ -50,3 +50,21 @@ export const saveDirectory = async (
     return false;
   }
 };
+
+export const getFileList = async (ownerId: User["id"], dirId?: string) => {
+  return await prisma.file.findMany({
+    where: {
+      ownerId: ownerId,
+      folderId: dirId ? dirId : null,
+    },
+  });
+};
+
+export const getFolderList = async (ownerId: User["id"], dirId?: string) => {
+  return await prisma.folder.findMany({
+    where: {
+      ownerId: ownerId,
+      parentId: dirId ? dirId : null,
+    },
+  });
+};
