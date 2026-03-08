@@ -10,4 +10,6 @@ router
     res.json("hi");
   });
 
+router.route("/folder{/:folderId}").get(fileControllers.getDirectory);
+
 export default router;
