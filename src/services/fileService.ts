@@ -40,3 +40,24 @@ export const getFolderList = async (ownerId: User["id"], dirId?: string) => {
     },
   });
 };
+
+export const saveMultiFilesRecord = async (
+  ownerId: User["id"],
+  fileArray: Express.Multer.File[],
+  dirId?: string,
+) => {
+  const transformedFileArray = fileArray.map((file) => {
+    return {
+      displayName: file.originalname,
+      ownerId: ownerId,
+      folderId: dirId ? dirId : null,
+      size: file.size,
+      mimeType: file.mimetype,
+      fileName: file.filename,
+      destination: file.destination,
+    };
+  });
+  return await prisma.file.createMany({
+    data: transformedFileArray,
+  });
+};
