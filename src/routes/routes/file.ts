@@ -3,6 +3,8 @@ import * as fileControllers from "../../controllers/files.js";
 import { upload } from "../../configs/multer.js";
 const router: express.Router = express.Router();
 
+router.route("/").get(fileControllers.getRootDir);
+
 router
   .route("/upload")
   .get(fileControllers.getFileUpload)
