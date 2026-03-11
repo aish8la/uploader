@@ -8,7 +8,7 @@
   <body>
     <ul>
       <% folders.map(folder => { %>
-        <li><%= folder.name %></li>
+        <li><a href="<%= '/my-drive/folder/' + folder.id %>"><%= folder.name %></a></li>
       <% }); %> 
       <% files.map(file => { %>
         <li><%= folder.displayName %></li>
