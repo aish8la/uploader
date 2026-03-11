@@ -11,7 +11,7 @@
         <li><a href="<%= '/my-drive/folder/' + folder.id %>"><%= folder.name %></a></li>
       <% }); %> 
       <% files.map(file => { %>
-        <li><%= folder.displayName %></li>
+        <li><%= file.displayName %></li>
       <% }); %> 
     </ul>
   </body>

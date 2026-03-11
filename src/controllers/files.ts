@@ -2,7 +2,9 @@ import express from "express";
 import * as fileServices from "../services/fileService.js";
 
 export const getFileUpload: express.RequestHandler = (req, res) => {
-  res.render("file/upload");
+  const uploadLink =
+    "/my-drive/upload" + req.params.folderId ? req.params.folderId : "";
+  res.render("file/upload", { uploadLink });
 };
 
 export const getRootDir: express.RequestHandler = async (req, res) => {
@@ -29,4 +31,22 @@ export const getDirectory: express.RequestHandler = async (req, res) => {
     req.params.folderId,
   );
   res.render("file/list", { folders: folderList, files: fileList });
+};
+
+export const createMultiFileRecord: express.RequestHandler = (req, res) => {
+  if (!req.user?.id) {
+    return res.redirect("auth/login");
+  }
+
+  if (!req.files?.length) {
+    return res.redirect("/my-drive/upload"); // TODO: add proper error handling
+  }
+
+  fileServices.saveMultiFilesRecord(
+    req.user.id,
+    req.files as Express.Multer.File[],
+    req.params.folderId,
+  );
+
+  res.redirect("/my-drive"); // TODO: Change this to redirect user to last folder
 };

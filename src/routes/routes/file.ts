@@ -6,11 +6,9 @@ const router: express.Router = express.Router();
 router.route("/").get(fileControllers.getRootDir);
 
 router
-  .route("/upload")
+  .route("/upload{/:folderId}")
   .get(fileControllers.getFileUpload)
-  .post(upload.single("file"), (req, res) => {
-    res.json("hi");
-  });
+  .post(upload.array("file", 5), fileControllers.createMultiFileRecord);
 
 router.route("/folder{/:folderId}").get(fileControllers.getDirectory);
 

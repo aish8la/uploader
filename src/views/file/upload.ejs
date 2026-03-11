@@ -6,8 +6,8 @@
     <title>Uploader</title>
   </head>
   <body>
-    <form action="/my-drive/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="file">
+    <form action="<%= uploadLink %>" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" multiple required>
       <button type="submit">Upload</button>
     </form>
   </body>
