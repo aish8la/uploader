@@ -2,8 +2,9 @@ import express from "express";
 import * as fileServices from "../services/fileService.js";
 
 export const getFileUpload: express.RequestHandler = (req, res) => {
-  const uploadLink =
-    "/my-drive/upload" + req.params.folderId ? req.params.folderId : "";
+  const uploadLink = req.params.folderId
+    ? `/my-drive/upload/${req.params.folderId}`
+    : "/my-drive/upload";
   res.render("file/upload", { uploadLink });
 };
 
