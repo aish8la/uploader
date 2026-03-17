@@ -1,7 +1,10 @@
 import express from "express";
 import * as fileControllers from "../../controllers/files.js";
 import { upload } from "../../configs/multer.js";
+import { requireAuthentication } from "../../middleware/auth.js";
 const router: express.Router = express.Router();
+
+router.use(requireAuthentication);
 
 router.route("/").get(fileControllers.getRootDir);
 
