@@ -1,9 +1,12 @@
 import express from "express";
 
-export const isAuthenticated: express.RequestHandler = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
+export const requireAuthentication: express.RequestHandler = (
+  req,
+  res,
+  next,
+) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect(`/auth/login?returnTo=${req.originalUrl}`);
   }
-
-  return res.redirect("/auth/login");
+  next();
 };

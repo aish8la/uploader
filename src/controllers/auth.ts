@@ -36,7 +36,8 @@ export const postLogin: express.RequestHandler = (req, res, next) => {
       if (err) return next(err);
       req.session.save((err) => {
         if (err) return next(err);
-        return res.redirect("/");
+        const returnUrl = req.query.returnTo;
+        return res.redirect((returnUrl as string) || "/");
       });
     });
   };
