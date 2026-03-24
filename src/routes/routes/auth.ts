@@ -1,5 +1,7 @@
 import express from "express";
 import * as authControllers from "../../controllers/auth.js";
+import { validation } from "../../middleware/validation.js";
+import { NewUserSchema } from "../../schemas/validation.schema.js";
 const router: express.Router = express.Router();
 
 router
@@ -10,7 +12,7 @@ router
 router
   .route("/signup")
   .get(authControllers.getSignup)
-  .post(authControllers.postSignup);
+  .post(validation({ bodySchema: NewUserSchema }), authControllers.postSignup);
 
 router.route("/logout").get(authControllers.getLogout);
 
