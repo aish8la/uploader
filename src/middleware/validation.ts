@@ -15,7 +15,7 @@ const parseSchema = async (data: unknown, schema: z.ZodSchema) => {
 
 export const validation = (
   schemaObject: RequestValidationSchema,
-  redirect?: string,
+  redirect: string,
 ): RequestHandler => {
   const middleware: RequestHandler = async (req, res, next) => {
     try {
@@ -33,10 +33,7 @@ export const validation = (
         req.session.inputErrors = z.flattenError(e);
         return req.session.save((err) => {
           if (err) return next(err);
-          if (redirect) {
-            return res.redirect(redirect);
-          }
-          next();
+          res.redirect(redirect);
         });
       }
       return next(e);
