@@ -6,7 +6,7 @@ const envSchema = z.object({
   NODE_ENV: z
     .union([z.literal("development"), z.literal("production")])
     .default("development"),
-  FALLBACK_HASH_GEN_STRING: z.string(),
+  FALLBACK_HASH: z.string(),
   SESSION_SECRET: z.string(),
 });
 

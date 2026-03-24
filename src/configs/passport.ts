@@ -9,9 +9,7 @@ export const localStrategy = new Strategy(
   async (email, password, done) => {
     try {
       const user = await getUserByEmail(email);
-      const hashedPassword = user
-        ? user.password
-        : process.env.FALLBACK_HASH_GEN_STRING;
+      const hashedPassword = user ? user.password : process.env.FALLBACK_HASH;
       const isMatch = await argon2.verify(hashedPassword, password);
 
       if (user && isMatch) {
