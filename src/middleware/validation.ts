@@ -44,3 +44,16 @@ export const validation = (
   };
   return middleware;
 };
+
+export const getPreviousReqError: RequestHandler = (req, res, next) => {
+  if (!req?.session?.inputErrors) {
+    return next();
+  }
+
+  res.locals.inputErrors = req.session.inputErrors;
+  delete req.session.inputErrors;
+  req.session.save((err) => {
+    if (err) return next(err);
+    next();
+  });
+};

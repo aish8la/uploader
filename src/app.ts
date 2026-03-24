@@ -7,6 +7,7 @@ import { __dirname } from "./configs/storage.js";
 import { localStrategy } from "./configs/passport.js";
 import router from "./routes/main.js";
 import { errorMiddleware } from "./middleware/error.js";
+import { getPreviousReqError } from "./middleware/validation.js";
 
 const app = express();
 
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV === "production") {
 passport.use(localStrategy);
 app.use(sessionMiddleware);
 app.use(passport.session());
+app.use(getPreviousReqError);
 app.use(router);
 app.use(errorMiddleware);
 
