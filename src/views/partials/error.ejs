@@ -1,0 +1,7 @@
+<% if (locals.inputErrors) { %>
+  <ul >
+    <% Object?.entries(inputErrors?.fieldErrors).forEach(([key, value]) => { %>
+      <li><%= value[0] %></li>
+    <% }); %>
+  </ul>
+<% } %>
