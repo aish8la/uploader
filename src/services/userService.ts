@@ -1,5 +1,5 @@
 import { prisma } from "../configs/prisma.js";
-import type { NewUser, User } from "../schemas/user.schema.js";
+import type { NewUserOutput, User } from "../schemas/validation.schema.js";
 
 export const getSafeUser = async (id: User["id"]) => {
   return await prisma.user.findFirst({
@@ -20,7 +20,7 @@ export const getUserByEmail = async (email: User["email"]) => {
   });
 };
 
-export const postNewUser = async (user: NewUser) => {
+export const postNewUser = async (user: NewUserOutput) => {
   return await prisma.user.create({
     data: user,
   });

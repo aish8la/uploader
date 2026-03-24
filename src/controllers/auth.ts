@@ -1,5 +1,5 @@
 import express from "express";
-import type { NewUser } from "../schemas/user.schema.js";
+import type { NewUserOutput } from "../schemas/validation.schema.js";
 import { postNewUser } from "../services/userService.js";
 import * as argon2 from "argon2";
 import passport from "passport";
@@ -14,7 +14,7 @@ export const getSignup: express.RequestHandler = (req, res) => {
 
 export const postSignup: express.RequestHandler = async (req, res) => {
   //TODO: Use validated data
-  const data: NewUser = {
+  const data: NewUserOutput = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,

@@ -1,4 +1,4 @@
-import type { User } from "../schemas/user.schema.js";
+import type { User } from "../schemas/validation.schema.js";
 import { prisma } from "../configs/prisma.js";
 
 export const saveDirectory = async (

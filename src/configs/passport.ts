@@ -2,7 +2,7 @@ import { Strategy } from "passport-local";
 import passport from "passport";
 import * as argon2 from "argon2";
 import { getSafeUser, getUserByEmail } from "../services/userService.js";
-import { SafeUserSchema, type User } from "../schemas/user.schema.js";
+import { SafeUserSchema, type User } from "../schemas/validation.schema.js";
 
 export const localStrategy = new Strategy(
   { usernameField: "email" },
@@ -22,7 +22,7 @@ export const localStrategy = new Strategy(
     } catch (err) {
       return done(err);
     }
-  }
+  },
 );
 
 passport.serializeUser((user, done) => {
