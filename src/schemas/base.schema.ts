@@ -16,3 +16,5 @@ export const userField = {
     .transform((v) => (v === "" || v === undefined ? null : v))
     .nullable(),
 };
+
+export const uuidInput = z.string().pipe(z.guid());

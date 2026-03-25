@@ -61,3 +61,12 @@ export const saveMultiFilesRecord = async (
     data: transformedFileArray,
   });
 };
+
+export const getFolder = async (ownerId: User["id"], folderId: string) => {
+  return await prisma.folder.findFirst({
+    where: {
+      id: folderId,
+      ownerId: ownerId,
+    },
+  });
+};

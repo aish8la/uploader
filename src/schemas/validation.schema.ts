@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { userField } from "./base.schema.js";
+import { userField, uuidInput } from "./base.schema.js";
 
 export const UserSchema = z.object({
   id: userField.id,
@@ -25,3 +25,9 @@ export type User = z.infer<typeof UserSchema>;
 export type SafeUser = z.infer<typeof SafeUserSchema>;
 export type NewUserInput = z.input<typeof NewUserSchema>;
 export type NewUserOutput = z.output<typeof NewUserSchema>;
+
+export const FolderIdSchema = z.object({
+  folderId: uuidInput.optional(),
+});
+
+export type FolderID = z.infer<typeof FolderIdSchema>;
