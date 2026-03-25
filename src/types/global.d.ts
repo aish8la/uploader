@@ -19,7 +19,7 @@ export interface AuthenticatedRequest extends Request {
   user: Express.User;
 }
 
-type ValidatedInput<TBody = unknown, TParam = unknown> = {
+export type ValidatedInput<TBody = unknown, TParam = unknown> = {
   body: TBody;
   params: TParam;
 };
