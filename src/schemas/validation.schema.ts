@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { userField, uuidInput } from "./base.schema.js";
+import { folderName, userField, uuidInput } from "./base.schema.js";
 
 export const UserSchema = z.object({
   id: userField.id,
@@ -31,3 +31,9 @@ export const FolderIdSchema = z.object({
 });
 
 export type FolderID = z.infer<typeof FolderIdSchema>;
+
+export const FolderNameSchema = z.object({
+  folderName: folderName,
+});
+
+export type FolderName = z.infer<typeof FolderNameSchema>;

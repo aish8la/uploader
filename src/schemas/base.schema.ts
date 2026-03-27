@@ -18,3 +18,5 @@ export const userField = {
 };
 
 export const uuidInput = z.string().pipe(z.guid());
+
+export const folderName = z.string().max(20).min(1);

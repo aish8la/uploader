@@ -6,7 +6,10 @@ import {
   requireFolderAccess,
 } from "../../middleware/auth.js";
 import { validation } from "../../middleware/validation.js";
-import { FolderIdSchema } from "../../schemas/validation.schema.js";
+import {
+  FolderIdSchema,
+  FolderNameSchema,
+} from "../../schemas/validation.schema.js";
 const router: express.Router = express.Router();
 
 router.use(requireAuthentication);
@@ -21,6 +24,21 @@ router
   )
   .get(fileControllers.getFileUpload)
   .post(upload.array("file", 5), fileControllers.createMultiFileRecord);
+
+router
+  .route("/new{/:folderId}")
+  .all(
+    validation({ paramSchema: FolderIdSchema }, "/my-drive/new"),
+    requireFolderAccess,
+  )
+  .get(fileControllers.getCreateFolder)
+  .post(
+    validation(
+      { bodySchema: FolderNameSchema, paramSchema: FolderIdSchema },
+      "/my-drive/new",
+    ),
+    fileControllers.postCreateFolder,
+  );
 
 router
   .route("/folder{/:folderId}")

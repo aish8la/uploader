@@ -1,6 +1,7 @@
 import express from "express";
 import * as fileServices from "../services/fileService.js";
-import type { AuthenticatedRequest } from "../types/global.js";
+import type { AuthenticatedRequest, ValidatedInput } from "../types/global.js";
+import type { FolderID, FolderName } from "../schemas/validation.schema.js";
 
 export const getFileUpload: express.RequestHandler = (req, res) => {
   const uploadLink = req.params.folderId
@@ -44,6 +45,25 @@ export const createMultiFileRecord: express.RequestHandler = async (
   );
 
   res.redirect("/my-drive"); // TODO: Change this to redirect user to last folder
+};
+
+export const getCreateFolder: express.RequestHandler = (req, res) => {
+  const createLink = req.params.folderId
+    ? `/my-drive/new/${req.params.folderId}`
+    : "/my-drive/new";
+  res.render("file/new", { createLink });
+};
+
+export const postCreateFolder: express.RequestHandler = async (req, res) => {
+  const { user } = req as AuthenticatedRequest;
+  const { params, body } = req.validatedInput as ValidatedInput<
+    FolderName,
+    FolderID
+  >;
+
+  await fileServices.saveDirectory(user.id, body.folderName, params?.folderId);
+
+  res.redirect("/my-drive");
 };
 
 // TODO: return to previous folder after operations
