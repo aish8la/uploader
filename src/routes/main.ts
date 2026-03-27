@@ -12,6 +12,7 @@ router.use("/", indexRouter);
 
 // Un matched route handler
 router.use((req, res, next) => {
+  if (res.headersSent) return;
   next(new NotFoundError());
 });
 
