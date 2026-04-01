@@ -48,4 +48,12 @@ router
   )
   .get(fileControllers.getDirectory);
 
+router
+  .route("/folder/:folderId/delete")
+  .all(
+    validation({ paramSchema: FolderIdSchema }, "/my-drive/folder"),
+    requireFolderAccess,
+  )
+  .get(fileControllers.getDeleteFolder);
+
 export default router;

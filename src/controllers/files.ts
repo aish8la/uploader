@@ -1,7 +1,11 @@
 import express from "express";
 import * as fileServices from "../services/fileService.js";
 import type { AuthenticatedRequest, ValidatedInput } from "../types/global.js";
-import type { FolderID, FolderName } from "../schemas/validation.schema.js";
+import type {
+  FolderID,
+  FolderIDRequired,
+  FolderName,
+} from "../schemas/validation.schema.js";
 
 export const getFileUpload: express.RequestHandler = (req, res) => {
   const uploadLink = req.params.folderId
@@ -64,6 +68,24 @@ export const postCreateFolder: express.RequestHandler = async (req, res) => {
   await fileServices.saveDirectory(user.id, body.folderName, params?.folderId);
 
   res.redirect("/my-drive");
+};
+
+export const getDeleteFolder: express.RequestHandler = async (req, res) => {
+  const { params } = req.validatedInput as ValidatedInput<
+    never,
+    FolderIDRequired
+  >;
+
+  const fileExist = await fileServices.fileExists(params.folderId);
+  const path = fileExist
+    ? "There are files in this folder. Are you sure you want to delete this folder ?"
+    : "Are you sure you want to delete this folder ?";
+
+  res.render("file/prompt", {
+    path: "/my-drive/folder/" + params.folderId + "/delete",
+    title: "Delete Folder",
+    prompt: path,
+  });
 };
 
 // TODO: return to previous folder after operations

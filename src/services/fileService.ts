@@ -70,3 +70,13 @@ export const getFolder = async (ownerId: User["id"], folderId: string) => {
     },
   });
 };
+
+export const fileExists = async (folderId: string) => {
+  return (await prisma.file.findFirst({
+    where: {
+      folderId: folderId,
+    },
+  }))
+    ? true
+    : false;
+};

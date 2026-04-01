@@ -37,3 +37,9 @@ export const FolderNameSchema = z.object({
 });
 
 export type FolderName = z.infer<typeof FolderNameSchema>;
+
+export const FolderIdRequired = z.object({
+  folderId: uuidInput,
+});
+
+export type FolderIDRequired = z.infer<typeof FolderIdRequired>;
