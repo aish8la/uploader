@@ -4,7 +4,7 @@ model Folder {
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz()
   owner        User     @relation(fields: [ownerId], references: [id])
   ownerId      Int      @map("owner_id")
-  parentFolder Folder?  @relation("ParentFolder", fields: [parentId], references: [id])
+  parentFolder Folder?  @relation("ParentFolder", fields: [parentId], references: [id], onDelete: Cascade)
   childFolders Folder[] @relation("ParentFolder")
   parentId     String?  @map("parent_id") @db.Uuid
   files        File[]
@@ -17,7 +17,7 @@ model File {
   displayName String   @map("display_name")
   owner       User     @relation(fields: [ownerId], references: [id])
   ownerId     Int      @map("owner_id")
-  folder      Folder?  @relation(fields: [folderId], references: [id])
+  folder      Folder?  @relation(fields: [folderId], references: [id], onDelete: Cascade)
   folderId    String?  @map("folder_id") @db.Uuid
   size        BigInt   @default(0)
   mimeType    String   @map("mime_type")
